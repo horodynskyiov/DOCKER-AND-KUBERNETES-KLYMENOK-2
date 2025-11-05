@@ -31,9 +31,8 @@ RUN echo "app:*:1000:1000::/home/app:/bin/sh" > /tmp/passwd
 FROM scratch
 # Copy the passwd file to allow non-root user execution
 COPY --from=stage-build /tmp/passwd /etc/passwd
-# Switch to non-root user for better security
 COPY --from=stage-build /usr/local/bin/app /usr/local/bin/app
-# Set the user to 'app'
+# Switch to non-root user for better security -> set the user to 'app'
 USER app
 
 # Expose port 8080 to allow communication to/from the container
